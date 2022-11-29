@@ -50,13 +50,6 @@ public class ClientServiceTests {
     }
 
     @Test
-    void newClientContainsName() {
-        Client newClient = clientService.addClient(mockupClient);
-
-        Assertions.assertNotNull(newClient);
-    }
-
-    @Test
     void newClientMustContainName(){
         mockupClient.setName(null);
 
