@@ -2,11 +2,10 @@ package com.rubensc.crm.service;
 
 import com.rubensc.crm.persistence.model.client.Client;
 import com.rubensc.crm.persistence.model.client.ClientStatusType;
+import com.rubensc.crm.persistence.repository.client.ClientRepository;
 import com.rubensc.crm.service.client.ClientService;
-import com.rubensc.crm.service.client.exception.ClientMissingEmailException;
-import com.rubensc.crm.service.client.exception.ClientMissingNameException;
-import com.rubensc.crm.service.client.exception.ClientMissingStatusException;
-import com.rubensc.crm.service.client.exception.ClientMissingTinException;
+import com.rubensc.crm.service.client.exception.*;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,10 +18,13 @@ public class ClientServiceTests {
     @Autowired
     ClientService clientService;
 
+    @Autowired
+    ClientRepository clientRepository;
+
     Client mockupClient;
 
     @BeforeEach
-    void init() {
+    void beforeEach() {
         mockupClient = new Client();
         mockupClient.setTin("948790779");
         mockupClient.setName("MockupBusinessName");
@@ -30,6 +32,11 @@ public class ClientServiceTests {
         mockupClient.setEmail("mockupClient@email.com");
         mockupClient.setAddress("mockupClientAddress");
         mockupClient.setStatusType(ClientStatusType.CURRENT);
+    }
+
+    @AfterEach
+    void afterEach() {
+        clientRepository.deleteAll();
     }
 
     @Test
@@ -64,6 +71,15 @@ public class ClientServiceTests {
         mockupClient.setStatusType(null);
 
         Assertions.assertThrows(ClientMissingStatusException.class, () -> {
+            clientService.addClient(mockupClient);
+        });
+    }
+
+    @Test
+    void newClientMustContainAtLestOneOpportunity(){
+        mockupClient.setEmail(null);
+
+        Assertions.assertThrows(ClientMissingOpportunityException.class, () -> {
             clientService.addClient(mockupClient);
         });
     }
