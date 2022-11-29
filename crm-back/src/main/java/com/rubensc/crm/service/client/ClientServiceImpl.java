@@ -2,6 +2,7 @@ package com.rubensc.crm.service.client;
 
 import com.rubensc.crm.persistence.model.client.Client;
 import com.rubensc.crm.persistence.repository.client.ClientRepository;
+import com.rubensc.crm.service.client.exception.ClientMissingEmailException;
 import com.rubensc.crm.service.client.exception.ClientMissingNameException;
 import com.rubensc.crm.service.client.exception.ClientMissingStatusException;
 import com.rubensc.crm.service.client.exception.ClientMissingTinException;
@@ -20,8 +21,11 @@ public class ClientServiceImpl implements ClientService {
         if (newClient.getTin() == null)
             throw new ClientMissingTinException();
 
-        if (newClient.getName()==null)
-                throw new ClientMissingNameException();
+        if (newClient.getName() == null)
+            throw new ClientMissingNameException();
+
+        if (newClient.getEmail() == null)
+            throw new ClientMissingEmailException();
 
         if (newClient.getStatusType() == null)
             throw new ClientMissingStatusException();
