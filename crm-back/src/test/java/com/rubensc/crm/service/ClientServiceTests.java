@@ -3,6 +3,7 @@ package com.rubensc.crm.service;
 import com.rubensc.crm.persistence.model.client.Client;
 import com.rubensc.crm.persistence.model.client.ClientStatusType;
 import com.rubensc.crm.service.client.ClientService;
+import com.rubensc.crm.service.client.exception.ClientMissingEmailException;
 import com.rubensc.crm.service.client.exception.ClientMissingNameException;
 import com.rubensc.crm.service.client.exception.ClientMissingStatusException;
 import com.rubensc.crm.service.client.exception.ClientMissingTinException;
@@ -46,6 +47,15 @@ public class ClientServiceTests {
 
         Assertions.assertThrows(ClientMissingNameException.class, () -> {
            clientService.addClient(mockupClient);
+        });
+    }
+
+    @Test
+    void newClientMustContainEmail(){
+        mockupClient.setEmail(null);
+
+        Assertions.assertThrows(ClientMissingEmailException.class, () -> {
+            clientService.addClient(mockupClient);
         });
     }
 
