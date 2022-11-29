@@ -4,6 +4,7 @@ import com.rubensc.crm.persistence.model.client.Client;
 import com.rubensc.crm.persistence.model.client.ClientStatusType;
 import com.rubensc.crm.service.client.ClientService;
 import com.rubensc.crm.service.client.exceptions.ClientMissingStatusException;
+import com.rubensc.crm.service.client.exceptions.ClientMissingTinException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -41,6 +42,23 @@ public class ClientServiceTests {
         mockupClient.setStatusType(null);
 
         Assertions.assertThrows(ClientMissingStatusException.class, () -> {
+            clientService.addClient(mockupClient);
+        });
+    }
+
+    @Test
+    void newClientContainsTin() {
+        Client newClient = clientService.addClient(mockupClient);
+
+        Assertions.assertNotNull(newClient.getTin());
+    }
+
+    @Test
+    void newClientMustContainTin() {
+        mockupClient.setTin(null);
+        Client newClient = clientService.addClient(mockupClient);
+
+        Assertions.assertThrows(ClientMissingTinException.class, () -> {
             clientService.addClient(mockupClient);
         });
     }
