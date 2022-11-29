@@ -1,6 +1,7 @@
 package com.rubensc.crm.service.client;
 
 import com.rubensc.crm.persistence.model.client.Client;
+import com.rubensc.crm.persistence.model.plannedAction.PlannedAction;
 
 import java.util.List;
 
@@ -11,5 +12,6 @@ public interface ClientService {
     Client createClient(Client newClient);
     Client updateClient(Long clientId, Client updatedClient);
     Client cancelClientById(Long clientId);
+    List<PlannedAction> getClientPlannedActions(Long clientId);
 
 }

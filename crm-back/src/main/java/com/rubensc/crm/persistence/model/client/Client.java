@@ -1,6 +1,7 @@
 package com.rubensc.crm.persistence.model.client;
 
 import com.rubensc.crm.persistence.model.opportunity.Opportunity;
+import com.rubensc.crm.persistence.model.plannedAction.PlannedAction;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -47,7 +48,9 @@ public class Client {
     @NotNull
     ClientStatusType statusType;
 
-    @NotNull
-    @OneToMany
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     List<Opportunity> opportunityList;
+
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
+    List<PlannedAction> plannedActionList;
 }

@@ -1,6 +1,6 @@
 package com.rubensc.crm.persistence.model.opportunity;
 
-import com.rubensc.crm.persistence.model.user.User;
+import com.rubensc.crm.persistence.model.user.AppUser;
 import com.rubensc.crm.persistence.model.client.Client;
 import com.rubensc.crm.persistence.model.plannedAction.PlannedAction;
 import lombok.*;
@@ -11,6 +11,7 @@ import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
 
+
 @Entity
 @Table
 @Getter
@@ -20,25 +21,26 @@ public class Opportunity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    Long id;
+    private Long id;
 
     @Size(max = 40)
-    String name;
+    private String name;
 
-    @ManyToOne
-    Client client;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "client")
+    private Client client;
 
-    @NotNull
-    @OneToMany
-    List<PlannedAction> plannedActionList;
+    @OneToMany(mappedBy = "opportunity", fetch = FetchType.EAGER)
+    private List<PlannedAction> plannedActionList;
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    OpportunityStatusType statusType;
+    private OpportunityStatusType statusType;
 
     @NotNull
-    LocalDateTime creationDateTime;
+    private LocalDateTime creationDateTime;
 
-    @ManyToOne
-    User user;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "app_user")
+    private AppUser user;
 }
