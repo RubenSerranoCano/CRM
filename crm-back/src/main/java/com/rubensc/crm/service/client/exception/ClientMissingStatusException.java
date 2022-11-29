@@ -1,8 +1,8 @@
-package com.rubensc.crm.service.client.exceptions;
+package com.rubensc.crm.service.client.exception;
 
 public class ClientMissingStatusException extends RuntimeException{
 
     public ClientMissingStatusException(){
-        super("Client status is missing.");
+        super("Client's status is missing.");
     };
 }

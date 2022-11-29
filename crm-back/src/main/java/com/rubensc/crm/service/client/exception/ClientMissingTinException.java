@@ -1,7 +1,7 @@
-package com.rubensc.crm.service.client.exceptions;
+package com.rubensc.crm.service.client.exception;
 
 public class ClientMissingTinException  extends RuntimeException{
     public ClientMissingTinException(){
-        super("Client TIN is missing.");
+        super("Client's TIN is missing.");
     };
 }

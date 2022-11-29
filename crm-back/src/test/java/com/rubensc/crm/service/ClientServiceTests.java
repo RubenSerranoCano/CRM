@@ -3,8 +3,9 @@ package com.rubensc.crm.service;
 import com.rubensc.crm.persistence.model.client.Client;
 import com.rubensc.crm.persistence.model.client.ClientStatusType;
 import com.rubensc.crm.service.client.ClientService;
-import com.rubensc.crm.service.client.exceptions.ClientMissingStatusException;
-import com.rubensc.crm.service.client.exceptions.ClientMissingTinException;
+import com.rubensc.crm.service.client.exception.ClientMissingNameException;
+import com.rubensc.crm.service.client.exception.ClientMissingStatusException;
+import com.rubensc.crm.service.client.exception.ClientMissingTinException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,13 +32,6 @@ public class ClientServiceTests {
     }
 
     @Test
-    void newClientContainsStatus() {
-       Client newClient = clientService.addClient(mockupClient);
-
-        Assertions.assertNotNull(newClient.getStatusType());
-    }
-
-    @Test
     void newClientMustContainStatus() {
         mockupClient.setStatusType(null);
 
@@ -47,18 +41,27 @@ public class ClientServiceTests {
     }
 
     @Test
-    void newClientContainsTin() {
-        Client newClient = clientService.addClient(mockupClient);
-
-        Assertions.assertNotNull(newClient.getTin());
-    }
-
-    @Test
     void newClientMustContainTin() {
         mockupClient.setTin(null);
 
         Assertions.assertThrows(ClientMissingTinException.class, () -> {
             clientService.addClient(mockupClient);
+        });
+    }
+
+    @Test
+    void newClientContainsName() {
+        Client newClient = clientService.addClient(mockupClient);
+
+        Assertions.assertNotNull(newClient);
+    }
+
+    @Test
+    void newClientMustContainName(){
+        mockupClient.setName(null);
+
+        Assertions.assertThrows(ClientMissingNameException.class, () -> {
+           clientService.addClient(mockupClient);
         });
     }
 }
