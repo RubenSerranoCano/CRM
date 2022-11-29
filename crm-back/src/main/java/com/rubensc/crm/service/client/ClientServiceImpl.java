@@ -2,19 +2,15 @@ package com.rubensc.crm.service.client;
 
 import com.rubensc.crm.persistence.model.client.Client;
 import com.rubensc.crm.persistence.model.client.ClientStatusType;
-import com.rubensc.crm.persistence.model.opportunity.Opportunity;
-import com.rubensc.crm.persistence.model.plannedAction.PlannedAction;
+import com.rubensc.crm.persistence.model.plannedaction.PlannedAction;
 import com.rubensc.crm.persistence.repository.client.ClientRepository;
 import com.rubensc.crm.service.client.exception.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class ClientServiceImpl implements ClientService {

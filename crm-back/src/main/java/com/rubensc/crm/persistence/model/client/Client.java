@@ -1,7 +1,7 @@
 package com.rubensc.crm.persistence.model.client;
 
 import com.rubensc.crm.persistence.model.opportunity.Opportunity;
-import com.rubensc.crm.persistence.model.plannedAction.PlannedAction;
+import com.rubensc.crm.persistence.model.plannedaction.PlannedAction;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

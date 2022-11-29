@@ -1,4 +1,4 @@
-package com.rubensc.crm.persistence.model.plannedAction;
+package com.rubensc.crm.persistence.model.plannedaction;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 

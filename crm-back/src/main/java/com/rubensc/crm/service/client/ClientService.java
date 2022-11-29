@@ -1,7 +1,7 @@
 package com.rubensc.crm.service.client;
 
 import com.rubensc.crm.persistence.model.client.Client;
-import com.rubensc.crm.persistence.model.plannedAction.PlannedAction;
+import com.rubensc.crm.persistence.model.plannedaction.PlannedAction;
 
 import java.util.List;
 

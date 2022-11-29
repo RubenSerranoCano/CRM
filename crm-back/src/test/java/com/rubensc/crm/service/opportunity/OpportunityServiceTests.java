@@ -5,6 +5,7 @@ import com.rubensc.crm.persistence.repository.opportunity.OpportunityRepository;
 import com.rubensc.crm.service.opportunity.OpportunityService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -20,9 +21,18 @@ public class OpportunityServiceTests {
     Opportunity mockupOpportunity;
 
     @BeforeEach
-    void baforeEach() {
-//        mockupOpportunity = new Opportunity();
-//        mockupOpportunity.setName("MockupOpportunity");
+    void beforeEach() {
+    }
+
+    /**
+     * Given an opportunity that is discarded
+     * when the user makes an update,
+     * if its client only has this opportunity,
+     * change the client status as cancelled.
+     */
+    @Test
+    void discardedOpportunityChangesClientStatus() {
+
     }
 
 }

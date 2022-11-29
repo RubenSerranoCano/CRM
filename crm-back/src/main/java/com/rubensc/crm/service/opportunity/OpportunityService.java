@@ -1,7 +1,6 @@
 package com.rubensc.crm.service.opportunity;
 
 import com.rubensc.crm.persistence.model.opportunity.Opportunity;
-import com.rubensc.crm.persistence.model.plannedAction.PlannedAction;
 
 import java.util.List;
 

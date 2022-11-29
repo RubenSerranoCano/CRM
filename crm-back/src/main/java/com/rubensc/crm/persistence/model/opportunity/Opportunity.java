@@ -2,7 +2,7 @@ package com.rubensc.crm.persistence.model.opportunity;
 
 import com.rubensc.crm.persistence.model.user.AppUser;
 import com.rubensc.crm.persistence.model.client.Client;
-import com.rubensc.crm.persistence.model.plannedAction.PlannedAction;
+import com.rubensc.crm.persistence.model.plannedaction.PlannedAction;
 import lombok.*;
 
 import javax.persistence.*;

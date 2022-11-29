@@ -1,4 +1,4 @@
-package com.rubensc.crm.presentation;
+package com.rubensc.crm.presentation.client;
 
 import com.rubensc.crm.service.client.exception.*;
 import org.springframework.http.HttpStatus;
