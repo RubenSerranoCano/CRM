@@ -32,15 +32,6 @@ public class ClientServiceTests {
     }
 
     @Test
-    void newClientMustContainStatus() {
-        mockupClient.setStatusType(null);
-
-        Assertions.assertThrows(ClientMissingStatusException.class, () -> {
-            clientService.addClient(mockupClient);
-        });
-    }
-
-    @Test
     void newClientMustContainTin() {
         mockupClient.setTin(null);
 
@@ -55,6 +46,15 @@ public class ClientServiceTests {
 
         Assertions.assertThrows(ClientMissingNameException.class, () -> {
            clientService.addClient(mockupClient);
+        });
+    }
+
+    @Test
+    void newClientMustContainStatus() {
+        mockupClient.setStatusType(null);
+
+        Assertions.assertThrows(ClientMissingStatusException.class, () -> {
+            clientService.addClient(mockupClient);
         });
     }
 }
