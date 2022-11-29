@@ -56,7 +56,6 @@ public class ClientServiceTests {
     @Test
     void newClientMustContainTin() {
         mockupClient.setTin(null);
-        Client newClient = clientService.addClient(mockupClient);
 
         Assertions.assertThrows(ClientMissingTinException.class, () -> {
             clientService.addClient(mockupClient);
