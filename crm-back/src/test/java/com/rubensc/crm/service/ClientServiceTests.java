@@ -42,9 +42,8 @@ public class ClientServiceTests {
     @Test
     void newClientMustContainTin() {
         mockupClient.setTin(null);
-
         Assertions.assertThrows(ClientMissingTinException.class, () -> {
-            clientService.addClient(mockupClient);
+            clientService.createClient(mockupClient);
         });
     }
 
@@ -53,7 +52,7 @@ public class ClientServiceTests {
         mockupClient.setName(null);
 
         Assertions.assertThrows(ClientMissingNameException.class, () -> {
-           clientService.addClient(mockupClient);
+           clientService.createClient(mockupClient);
         });
     }
 
@@ -62,7 +61,7 @@ public class ClientServiceTests {
         mockupClient.setEmail(null);
 
         Assertions.assertThrows(ClientMissingEmailException.class, () -> {
-            clientService.addClient(mockupClient);
+            clientService.createClient(mockupClient);
         });
     }
 
@@ -71,7 +70,7 @@ public class ClientServiceTests {
         mockupClient.setStatusType(null);
 
         Assertions.assertThrows(ClientMissingStatusException.class, () -> {
-            clientService.addClient(mockupClient);
+            clientService.createClient(mockupClient);
         });
     }
 
@@ -80,7 +79,7 @@ public class ClientServiceTests {
         mockupClient.setOpportunityList(null);
 
         Assertions.assertThrows(ClientMissingOpportunityException.class, () -> {
-            clientService.addClient(mockupClient);
+            clientService.createClient(mockupClient);
         });
     }
 }

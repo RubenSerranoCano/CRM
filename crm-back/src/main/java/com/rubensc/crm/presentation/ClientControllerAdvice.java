@@ -1,9 +1,6 @@
 package com.rubensc.crm.presentation;
 
-import com.rubensc.crm.service.client.exception.ClientMissingEmailException;
-import com.rubensc.crm.service.client.exception.ClientMissingNameException;
-import com.rubensc.crm.service.client.exception.ClientMissingStatusException;
-import com.rubensc.crm.service.client.exception.ClientMissingTinException;
+import com.rubensc.crm.service.client.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -38,6 +35,13 @@ public class ClientControllerAdvice {
     @ExceptionHandler(ClientMissingStatusException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     String clientMissingStatusException(ClientMissingStatusException e) {
+        return e.getMessage();
+    }
+
+    @ResponseBody
+    @ExceptionHandler(ClientMissingOpportunityException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    String clientMissingOpportunityException(ClientMissingOpportunityException e) {
         return e.getMessage();
     }
 }
