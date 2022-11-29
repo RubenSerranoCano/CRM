@@ -118,7 +118,28 @@ public class ClientServiceTests {
 
     @Test
     void retrievePlannedActionsFromClient() {
-        
+        AppUser user = new AppUser();
+        user.setEmail("email@example.com");
+        user.setPassword("password");
+
+        PlannedAction plannedAction = new PlannedAction();
+        plannedAction.setActionType(ActionType.EMAIL);
+        plannedAction.setStatusType(PlannedActionStatusType.DUE);
+        plannedAction.setCreationDateTime(LocalDateTime.now());
+        plannedAction.setClient(mockupClient);
+
+        List<PlannedAction> plannedActionList = new ArrayList<>();
+        plannedActionList.add(plannedAction);
+
+        Opportunity opportunity = new Opportunity();
+        opportunity.setName("OpportunityName");
+        opportunity.setClient(mockupClient);
+        opportunity.setPlannedActionList(plannedActionList);
+        opportunity.setStatusType(OpportunityStatusType.IN_PROGRESS);
+        opportunity.setCreationDateTime(LocalDateTime.now());
+        opportunity.setUser(user);
+        mockupClient.setPlannedActionList(plannedActionList);
+
         clientService.getClientPlannedActions(mockupClient.getId());
     }
 }

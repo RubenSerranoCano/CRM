@@ -10,6 +10,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -55,14 +57,19 @@ public class ClientServiceImpl implements ClientService {
     public Client cancelClientById(Long clientId) {
         clientRepository.findById(clientId).ifPresent(client -> client.setStatusType(ClientStatusType.CANCELLED));
         return clientRepository.findById(clientId).orElseThrow(() -> {
-            throw new IllegalArgumentException("Missing Id.");
+            throw new IllegalArgumentException("Missing client's id.");
         });
     }
 
     @Override
     public List<PlannedAction> getClientPlannedActions(Long clientId) {
+        Optional<Client> optionalClient = clientRepository.findById(clientId);
 
-        return null;
+        if (optionalClient.isPresent()) {
+            return optionalClient.get().getPlannedActionList();
+        } else {
+            throw new IllegalArgumentException("Missing client's id.");
+        }
     }
 
     private void validateNewClient(Client newClient) {
