@@ -47,6 +47,7 @@ public class Client {
     @NotNull
     ClientStatusType statusType;
 
+    @NotNull
     @OneToMany
     List<Opportunity> opportunityList;
 }

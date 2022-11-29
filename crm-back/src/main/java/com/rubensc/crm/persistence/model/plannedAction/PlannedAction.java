@@ -1,6 +1,7 @@
 package com.rubensc.crm.persistence.model.plannedAction;
 
 
+import com.rubensc.crm.persistence.model.opportunity.Opportunity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,4 +36,7 @@ public class PlannedAction {
 
     @NotNull
     LocalDateTime creationDateTime;
+
+    @ManyToOne
+    Opportunity opportunity;
 }
