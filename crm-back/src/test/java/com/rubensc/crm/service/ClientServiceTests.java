@@ -77,7 +77,7 @@ public class ClientServiceTests {
 
     @Test
     void newClientMustContainAtLestOneOpportunity(){
-        mockupClient.setEmail(null);
+        mockupClient.setOpportunityList(null);
 
         Assertions.assertThrows(ClientMissingOpportunityException.class, () -> {
             clientService.addClient(mockupClient);

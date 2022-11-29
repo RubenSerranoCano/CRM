@@ -15,6 +15,12 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public Client addClient(Client newClient) {
 
+        validateNewClient(newClient);
+
+        return clientRepository.save(newClient);
+    }
+
+    private void validateNewClient(Client newClient) {
         if (newClient.getTin() == null)
             throw new ClientMissingTinException();
 
@@ -27,6 +33,7 @@ public class ClientServiceImpl implements ClientService {
         if (newClient.getStatusType() == null)
             throw new ClientMissingStatusException();
 
-        return clientRepository.save(newClient);
+        if (newClient.getOpportunityList() == null || newClient.getOpportunityList().isEmpty())
+            throw new ClientMissingOpportunityException();
     }
 }
