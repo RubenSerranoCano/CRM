@@ -10,4 +10,9 @@ public class AppUserServiceImpl implements AppUserService{
     public ResponseEntity<AppUser> login(String email, String rawPassword) {
         return null;
     }
+
+    @Override
+    public ResponseEntity<AppUser> signup(String email, String rawPassword) {
+        return null;
+    }
 }

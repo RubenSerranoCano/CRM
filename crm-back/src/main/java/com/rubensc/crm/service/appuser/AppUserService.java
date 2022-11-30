@@ -7,4 +7,6 @@ public interface AppUserService {
 
     ResponseEntity<AppUser> login(String email, String rawPassword);
 
+    ResponseEntity<AppUser> signup(String email, String rawPassword);
+
 }
