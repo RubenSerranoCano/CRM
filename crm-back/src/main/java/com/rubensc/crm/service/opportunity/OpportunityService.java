@@ -10,6 +10,8 @@ public interface OpportunityService {
     Opportunity getOpportunityById(Long opportunityId);
     List<Opportunity> getAllOpportunities();
     Opportunity createOpportunity(Opportunity newOpportunity);
-    Opportunity updateOpportunity(Long opportunityId, Opportunity updatedOpportunity);
+    Opportunity updateOpportunity(Long oppotunityId, Opportunity updatedOpportunity);
     Opportunity discardOpportunity(Long opportunityId);
+
+    List<Opportunity> getOpportunitiesByClientId(Long clientId);
 }

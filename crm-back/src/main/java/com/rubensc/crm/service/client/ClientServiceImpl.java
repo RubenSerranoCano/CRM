@@ -32,7 +32,7 @@ public class ClientServiceImpl implements ClientService {
     public Client createClient(Client newClient) {
 
         validateNewClient(newClient);
-
+        System.out.println("create client: "+newClient.getPlannedActionList());
         return clientRepository.save(newClient);
     }
 
@@ -51,10 +51,13 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client cancelClientById(Long clientId) {
-        clientRepository.findById(clientId).ifPresent(client -> client.setStatusType(ClientStatusType.CANCELLED));
-        return clientRepository.findById(clientId).orElseThrow(() -> {
+        Optional<Client> optionalClient = clientRepository.findById(clientId);
+        if (optionalClient.isPresent()) {
+            optionalClient.get().setStatusType(ClientStatusType.CANCELLED);
+            return optionalClient.get();
+        } else {
             throw new IllegalArgumentException("Missing client's id.");
-        });
+        }
     }
 
     @Override
@@ -62,7 +65,9 @@ public class ClientServiceImpl implements ClientService {
         Optional<Client> optionalClient = clientRepository.findById(clientId);
 
         if (optionalClient.isPresent()) {
-            return optionalClient.get().getPlannedActionList();
+            Client client = optionalClient.get();
+            System.out.println("method "+client.getPlannedActionList());
+            return client.getPlannedActionList();
         } else {
             throw new IllegalArgumentException("Missing client's id.");
         }

@@ -10,11 +10,10 @@ import com.rubensc.crm.persistence.model.plannedaction.PlannedAction;
 import com.rubensc.crm.persistence.model.plannedaction.PlannedActionStatusType;
 import com.rubensc.crm.persistence.model.user.AppUser;
 import com.rubensc.crm.persistence.repository.client.ClientRepository;
-import com.rubensc.crm.persistence.repository.opportunity.OpportunityRepository;
-import com.rubensc.crm.persistence.repository.plannedaction.PlannedActionRepository;
 import com.rubensc.crm.persistence.repository.user.AppUserRepository;
 import com.rubensc.crm.service.client.exception.*;
-import org.junit.jupiter.api.AfterEach;
+import com.rubensc.crm.service.opportunity.OpportunityService;
+import com.rubensc.crm.service.plannedaction.PlannedActionService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,10 +34,10 @@ public class ClientServiceTests {
     ClientRepository clientRepository;
 
     @Autowired
-    OpportunityRepository opportunityRepository;
+    OpportunityService opportunityService;
 
     @Autowired
-    PlannedActionRepository plannedActionRepository;
+    PlannedActionService plannedActionService;
 
     @Autowired
     AppUserRepository appUserRepository;
@@ -61,15 +60,15 @@ public class ClientServiceTests {
         mockupClient.setAddress("mockupClientAddress");
 
         mockupClient.setStatusType(ClientStatusType.CURRENT);
-        clientRepository.save(mockupClient);
+//        clientRepository.save(mockupClient);
 
-        clientRepository.save(mockupClient);
+//        clientRepository.save(mockupClient);
     }
 
-    @AfterEach
-    void afterEach() {
-        clientRepository.deleteAll();
-    }
+//    @AfterEach
+//    void afterEach() {
+//        clientRepository.deleteAll();
+//    }
 
     @Test
     void newClientMustContainTin() {
@@ -115,6 +114,10 @@ public class ClientServiceTests {
         });
     }
 
+    /**
+     * Test whether planned actions can be retrieved from the user or not.
+     *
+     */
     @Test
     void retrievePlannedActionsFromClient() {
         AppUser user = new AppUser();
@@ -124,7 +127,7 @@ public class ClientServiceTests {
         PlannedAction plannedAction = new PlannedAction();
         plannedAction.setActionType(ActionType.EMAIL);
         plannedAction.setStatusType(PlannedActionStatusType.DUE);
-        plannedAction.setCreationDateTime(LocalDateTime.now());
+        plannedAction.setCreationDateTime(LocalDateTime.of(2022,11,30,0,0));
         plannedAction.setClient(mockupClient);
 
         List<PlannedAction> plannedActionList = new ArrayList<>();
@@ -135,10 +138,22 @@ public class ClientServiceTests {
         opportunity.setClient(mockupClient);
         opportunity.setPlannedActionList(plannedActionList);
         opportunity.setStatusType(OpportunityStatusType.IN_PROGRESS);
-        opportunity.setCreationDateTime(LocalDateTime.now());
+        opportunity.setCreationDateTime(LocalDateTime.of(2022,11,30,0,0));
         opportunity.setUser(user);
         mockupClient.setPlannedActionList(plannedActionList);
+        List<Opportunity> opportunityList = new ArrayList<>();
+        opportunityList.add(opportunity);
+        mockupClient.setOpportunityList(opportunityList);
 
-        clientService.getClientPlannedActions(mockupClient.getId());
+        appUserRepository.save(user);
+        opportunityService.createOpportunity(opportunity);
+        plannedActionService.createPlannedAction(plannedAction);
+
+        List<PlannedAction> serviceClientPlannedActions = plannedActionService.getPlannedActionsByClientId(mockupClient.getId());
+
+        Assertions.assertEquals(mockupClient.getPlannedActionList().size(), serviceClientPlannedActions.size());
+        for (int i = 0; i < mockupClient.getPlannedActionList().size(); i++) {
+            Assertions.assertEquals(mockupClient.getPlannedActionList().get(i), serviceClientPlannedActions.get(i));
+        }
     }
 }

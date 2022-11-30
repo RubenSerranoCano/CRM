@@ -6,13 +6,13 @@ import com.rubensc.crm.persistence.model.opportunity.Opportunity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-
-
+import java.util.Objects;
 
 
 @Entity
@@ -23,7 +23,7 @@ import java.time.LocalDateTime;
 public class PlannedAction {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     @Enumerated(EnumType.STRING)
@@ -48,4 +48,31 @@ public class PlannedAction {
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "client")
     Client client;
+
+    @Override
+    public String toString() {
+        return "PlannedAction{" +
+                "id=" + id +
+                ", actionType=" + actionType +
+                ", description='" + description + '\'' +
+                ", statusType=" + statusType +
+                ", dueDateTime=" + dueDateTime +
+                ", creationDateTime=" + creationDateTime +
+                ", opportunity=" + opportunity +
+                ", client=" + client +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        PlannedAction that = (PlannedAction) o;
+        return id != null && Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
