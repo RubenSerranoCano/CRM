@@ -10,10 +10,12 @@ import com.rubensc.crm.persistence.model.plannedaction.PlannedAction;
 import com.rubensc.crm.persistence.model.plannedaction.PlannedActionStatusType;
 import com.rubensc.crm.persistence.model.user.AppUser;
 import com.rubensc.crm.persistence.repository.client.ClientRepository;
+import com.rubensc.crm.persistence.repository.opportunity.OpportunityRepository;
 import com.rubensc.crm.persistence.repository.user.AppUserRepository;
 import com.rubensc.crm.service.client.exception.*;
 import com.rubensc.crm.service.opportunity.OpportunityService;
 import com.rubensc.crm.service.plannedaction.PlannedActionService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,6 +39,9 @@ public class ClientServiceTests {
     OpportunityService opportunityService;
 
     @Autowired
+    OpportunityRepository opportunityRepository;
+
+    @Autowired
     PlannedActionService plannedActionService;
 
     @Autowired
@@ -49,9 +54,6 @@ public class ClientServiceTests {
 
     @BeforeEach
     void beforeEach() {
-        List<PlannedAction> plannedActionList = new ArrayList<>();
-        plannedActionList.add(mockupPlannedAction);
-
         mockupClient = new Client();
         mockupClient.setTin("948790779");
         mockupClient.setName("MockupBusinessName");
@@ -61,14 +63,13 @@ public class ClientServiceTests {
 
         mockupClient.setStatusType(ClientStatusType.CURRENT);
 //        clientRepository.save(mockupClient);
-
-//        clientRepository.save(mockupClient);
     }
 
-//    @AfterEach
-//    void afterEach() {
-//        clientRepository.deleteAll();
-//    }
+    @AfterEach
+    void afterEach() {
+//        opportunityRepository.delete(mockupOpportunity);
+//        clientRepository.delete(mockupClient);
+    }
 
     @Test
     void newClientMustContainTin() {
@@ -80,11 +81,13 @@ public class ClientServiceTests {
 
     @Test
     void newClientMustContainName() {
+        clientRepository.save(mockupClient);
         mockupClient.setName(null);
 
         Assertions.assertThrows(ClientMissingNameException.class, () -> {
             clientService.createClient(mockupClient);
         });
+        clientRepository.delete(mockupClient);
     }
 
     @Test
@@ -116,10 +119,11 @@ public class ClientServiceTests {
 
     /**
      * Test whether planned actions can be retrieved from the user or not.
-     *
      */
     @Test
     void retrievePlannedActionsFromClient() {
+        clientRepository.save(mockupClient);
+
         AppUser user = new AppUser();
         user.setEmail("email@example.com");
         user.setPassword("password");
@@ -127,26 +131,26 @@ public class ClientServiceTests {
         PlannedAction plannedAction = new PlannedAction();
         plannedAction.setActionType(ActionType.EMAIL);
         plannedAction.setStatusType(PlannedActionStatusType.DUE);
-        plannedAction.setCreationDateTime(LocalDateTime.of(2022,11,30,0,0));
+        plannedAction.setCreationDateTime(LocalDateTime.of(2022, 11, 30, 0, 0));
         plannedAction.setClient(mockupClient);
 
         List<PlannedAction> plannedActionList = new ArrayList<>();
         plannedActionList.add(plannedAction);
 
-        Opportunity opportunity = new Opportunity();
-        opportunity.setName("OpportunityName");
-        opportunity.setClient(mockupClient);
-        opportunity.setPlannedActionList(plannedActionList);
-        opportunity.setStatusType(OpportunityStatusType.IN_PROGRESS);
-        opportunity.setCreationDateTime(LocalDateTime.of(2022,11,30,0,0));
-        opportunity.setUser(user);
+        mockupOpportunity = new Opportunity();
+        mockupOpportunity.setName("OpportunityName");
+        mockupOpportunity.setClient(mockupClient);
+        mockupOpportunity.setPlannedActionList(plannedActionList);
+        mockupOpportunity.setStatusType(OpportunityStatusType.IN_PROGRESS);
+        mockupOpportunity.setCreationDateTime(LocalDateTime.of(2022, 11, 30, 0, 0));
+        mockupOpportunity.setUser(user);
         mockupClient.setPlannedActionList(plannedActionList);
         List<Opportunity> opportunityList = new ArrayList<>();
-        opportunityList.add(opportunity);
+        opportunityList.add(mockupOpportunity);
         mockupClient.setOpportunityList(opportunityList);
 
         appUserRepository.save(user);
-        opportunityService.createOpportunity(opportunity);
+        opportunityService.createOpportunity(mockupOpportunity);
         plannedActionService.createPlannedAction(plannedAction);
 
         List<PlannedAction> serviceClientPlannedActions = plannedActionService.getPlannedActionsByClientId(mockupClient.getId());
