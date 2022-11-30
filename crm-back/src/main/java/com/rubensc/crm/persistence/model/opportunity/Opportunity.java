@@ -2,8 +2,7 @@ package com.rubensc.crm.persistence.model.opportunity;
 
 import com.rubensc.crm.persistence.model.client.Client;
 import com.rubensc.crm.persistence.model.plannedaction.PlannedAction;
-import com.rubensc.crm.persistence.model.user.AppUser;
-import lombok.EqualsAndHashCode;
+import com.rubensc.crm.persistence.model.appuser.AppUser;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

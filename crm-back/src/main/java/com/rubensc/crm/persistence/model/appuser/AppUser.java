@@ -1,4 +1,4 @@
-package com.rubensc.crm.persistence.model.user;
+package com.rubensc.crm.persistence.model.appuser;
 
 import com.rubensc.crm.persistence.model.opportunity.Opportunity;
 import lombok.Getter;
