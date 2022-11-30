@@ -2,9 +2,11 @@ package com.rubensc.crm.service.appuser;
 
 import com.rubensc.crm.persistence.model.appuser.AppUser;
 import com.rubensc.crm.persistence.repository.appuser.AppUserRepository;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -15,6 +17,10 @@ public class AppUserServiceImpl implements AppUserService {
     @Autowired
     AppUserRepository appUserRepository;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+
     @Override
     public ResponseEntity<AppUser> login(String email, String rawPassword) {
         Optional<AppUser> optionalAppUser = appUserRepository.findByEmail(email);
@@ -22,7 +28,7 @@ public class AppUserServiceImpl implements AppUserService {
         if (optionalAppUser.isPresent()) {
             AppUser appUser = optionalAppUser.get();
 
-            if (appUser.getPassword().equals(rawPassword)) {
+            if (passwordEncoder.matches(rawPassword, appUser.getPassword())) {
                 return ResponseEntity.status(HttpStatus.OK).body(appUser);
             } else {
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
@@ -34,6 +40,17 @@ public class AppUserServiceImpl implements AppUserService {
 
     @Override
     public ResponseEntity<AppUser> signup(String email, String rawPassword) {
-        return null;
+
+        if (StringUtils.isEmpty(email) || StringUtils.isEmpty(rawPassword)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+
+        AppUser newAppUser = new AppUser();
+        newAppUser.setEmail(email);
+        newAppUser.setPassword(passwordEncoder.encode(rawPassword));
+
+        appUserRepository.save(newAppUser);
+
+        return ResponseEntity.status(HttpStatus.OK).body(newAppUser);
     }
 }
