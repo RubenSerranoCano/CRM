@@ -21,11 +21,6 @@ public class SecurityConfig implements WebMvcConfigurer {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable();
-//                .authorizeRequests()
-//                .antMatchers("/login", "/signup").permitAll()
-//                .antMatchCers("api/v1/**").authenticated()
-//        ;
-
         return http.build();
     }
 

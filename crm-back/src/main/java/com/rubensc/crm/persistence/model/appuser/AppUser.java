@@ -10,6 +10,7 @@ import org.hibernate.Hibernate;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Objects;
@@ -36,9 +37,6 @@ public class AppUser {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Opportunity> opportunityList;
-
-//    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-//    private List<PlannedAction> plannedActions;
 
     @Override
     public boolean equals(Object o) {
