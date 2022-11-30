@@ -18,8 +18,8 @@ public class OpportunityController {
     OpportunityService opportunityService;
 
     @GetMapping("opportunities")
-    List<Opportunity> getAllUserOpportunities(@RequestParam Long userId) {
-       return opportunityService.getAllOpportunities(userId);
+    List<Opportunity> getAllUserOpportunities() {
+       return opportunityService.getAllOpportunities();
     }
 
 }

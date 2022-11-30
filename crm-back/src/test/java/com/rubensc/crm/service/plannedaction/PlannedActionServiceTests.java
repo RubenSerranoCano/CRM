@@ -94,7 +94,7 @@ public class PlannedActionServiceTests {
 
         appUserRepository.save(user);
         opportunityService.createOpportunity(mockupOpportunity);
-        plannedActionService.createPlannedAction(mockupClient.getId(), plannedAction);
+        plannedActionService.createPlannedAction(plannedAction);
 
         List<PlannedAction> serviceClientPlannedActions = plannedActionService.getPlannedActionsByClientId(mockupClient.getId());
 

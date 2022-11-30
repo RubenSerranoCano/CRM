@@ -37,8 +37,8 @@ public class AppUser {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Opportunity> opportunityList;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private List<PlannedAction> plannedActions;
+//    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+//    private List<PlannedAction> plannedActions;
 
     @Override
     public boolean equals(Object o) {

@@ -94,17 +94,18 @@ public class OpportunityServiceTests {
         mockupOpportunity.setCreationDateTime(LocalDateTime.of(2022, 11, 30, 0, 0));
         mockupOpportunity.setUser(user);
         mockupClient.setPlannedActionList(plannedActionList);
+
         List<Opportunity> opportunityList = new ArrayList<>();
         opportunityList.add(mockupOpportunity);
         mockupClient.setOpportunityList(opportunityList);
 
         appUserRepository.save(user);
         mockupOpportunity = opportunityService.createOpportunity(mockupOpportunity);
-//        plannedActionService.createPlannedAction(mockupClient.getId(), plannedAction);
+        plannedActionService.createPlannedAction(plannedAction);
 
 
-        opportunityService.discardOpportunity(mockupOpportunity.getId());
-        Assertions.assertTrue(opportunityService.discardOpportunity(mockupOpportunity.getId()).getClient().getStatusType() == ClientStatusType.CANCELLED);
+        Opportunity opportunity = opportunityService.discardOpportunity(mockupOpportunity.getId());
+        Assertions.assertSame(opportunity.getClient().getStatusType(), ClientStatusType.CANCELLED);
     }
 
 }

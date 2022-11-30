@@ -34,11 +34,11 @@ public class PlannedActionServiceImpl implements PlannedActionService {
 
     @Override
     public List<PlannedAction> getAllPlannedActions(Long userId) {
-        return appUserService.getAppUserById(userId).getPlannedActions();
+        return plannedActionRepository.findAll();
     }
 
     @Override
-    public PlannedAction createPlannedAction(Long userId, PlannedAction newPlannedAction) {
+    public PlannedAction createPlannedAction(PlannedAction newPlannedAction) {
         return plannedActionRepository.save(newPlannedAction);
     }
 
@@ -64,6 +64,4 @@ public class PlannedActionServiceImpl implements PlannedActionService {
     public List<PlannedAction> getPlannedActionsByClientId(Long clientId) {
         return clientService.getClientById(clientId).getPlannedActionList();
     }
-
-
 }

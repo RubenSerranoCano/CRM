@@ -17,7 +17,7 @@ import java.util.Objects;
 
 
 @Entity
-@Table
+@Table(name = "opportunity")
 @Getter
 @Setter
 @NoArgsConstructor

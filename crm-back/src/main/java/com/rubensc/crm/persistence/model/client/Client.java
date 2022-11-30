@@ -16,11 +16,10 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table
+@Table(name = "client")
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode
 public class Client {
 
     @Id

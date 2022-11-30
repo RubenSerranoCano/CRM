@@ -1,9 +1,10 @@
 package com.rubensc.crm.service.opportunity;
 
-import com.rubensc.crm.persistence.model.appuser.AppUser;
+import com.rubensc.crm.persistence.model.client.Client;
+import com.rubensc.crm.persistence.model.client.ClientStatusType;
 import com.rubensc.crm.persistence.model.opportunity.Opportunity;
+import com.rubensc.crm.persistence.model.opportunity.OpportunityStatusType;
 import com.rubensc.crm.persistence.repository.opportunity.OpportunityRepository;
-import com.rubensc.crm.service.appuser.AppUserService;
 import com.rubensc.crm.service.client.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,19 +21,14 @@ public class OpportunityServiceImpl implements OpportunityService {
     @Autowired
     ClientService clientService;
 
-    @Autowired
-    AppUserService appUserService;
-
     @Override
     public Opportunity getOpportunityById(Long opportunityId) {
         return opportunityRepository.findById(opportunityId).orElse(null);
     }
 
     @Override
-    public List<Opportunity> getAllOpportunities(Long userId) {
-        AppUser appUser = appUserService.getAppUserById(userId);
-
-        return opportunityRepository.findAllByUser(appUser).orElse(null);
+    public List<Opportunity> getAllOpportunities() {
+        return opportunityRepository.findAll();
     }
 
     @Override
@@ -55,6 +51,20 @@ public class OpportunityServiceImpl implements OpportunityService {
 
     @Override
     public Opportunity discardOpportunity(Long opportunityId) {
+        Optional<Opportunity> optionalOpportunity = opportunityRepository.findById(opportunityId);
+
+        if (optionalOpportunity.isPresent()) {
+            Opportunity opportunity = optionalOpportunity.get();
+            Client client = opportunity.getClient();
+
+            if (client.getOpportunityList().size() == 1) {
+                client.setStatusType(ClientStatusType.CANCELLED);
+            }
+            opportunity.setStatusType(OpportunityStatusType.DISCARDED);
+
+            return opportunity;
+        }
+
         return null;
     }
 

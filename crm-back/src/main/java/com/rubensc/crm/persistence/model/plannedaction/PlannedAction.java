@@ -17,7 +17,7 @@ import java.util.Objects;
 
 
 @Entity
-@Table
+@Table(name = "planned_action")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -42,9 +42,9 @@ public class PlannedAction {
     @NotNull
     LocalDateTime creationDateTime;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "user")
-    AppUser user;
+//    @ManyToOne(cascade = CascadeType.MERGE)
+//    @JoinColumn(name = "user")
+//    AppUser user;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "opportunity")

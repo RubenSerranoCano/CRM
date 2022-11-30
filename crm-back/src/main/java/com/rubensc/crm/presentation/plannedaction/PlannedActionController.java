@@ -20,8 +20,8 @@ public class PlannedActionController {
     }
 
     @PostMapping("plannedAction")
-    PlannedAction createPlannedAction(@RequestParam Long userId, @RequestBody PlannedAction plannedAction) {
-        return plannedActionService.createPlannedAction(userId, plannedAction);
+    PlannedAction createPlannedAction(@RequestBody PlannedAction plannedAction) {
+        return plannedActionService.createPlannedAction(plannedAction);
     }
 
 }
