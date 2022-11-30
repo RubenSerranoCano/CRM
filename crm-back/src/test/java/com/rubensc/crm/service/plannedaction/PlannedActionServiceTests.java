@@ -44,10 +44,9 @@ public class PlannedActionServiceTests {
     @Autowired
     AppUserRepository appUserRepository;
 
-    PlannedAction mockupPlannedAction;
     Client mockupClient;
+
     Opportunity mockupOpportunity;
-    AppUser mockupUser;
 
     @BeforeEach
     void beforeEach() {

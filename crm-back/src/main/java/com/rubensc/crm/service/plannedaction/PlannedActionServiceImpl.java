@@ -39,9 +39,6 @@ public class PlannedActionServiceImpl implements PlannedActionService {
 
     @Override
     public PlannedAction createPlannedAction(Long userId, PlannedAction newPlannedAction) {
-        AppUser user = appUserService.getAppUserById(userId);
-        newPlannedAction.setUser(user);
-
         return plannedActionRepository.save(newPlannedAction);
     }
 
