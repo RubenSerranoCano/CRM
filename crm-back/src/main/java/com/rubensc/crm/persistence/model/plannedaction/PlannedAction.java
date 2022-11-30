@@ -1,6 +1,7 @@
 package com.rubensc.crm.persistence.model.plannedaction;
 
 
+import com.rubensc.crm.persistence.model.appuser.AppUser;
 import com.rubensc.crm.persistence.model.client.Client;
 import com.rubensc.crm.persistence.model.opportunity.Opportunity;
 import lombok.Getter;
@@ -40,6 +41,10 @@ public class PlannedAction {
 
     @NotNull
     LocalDateTime creationDateTime;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "user")
+    AppUser user;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "opportunity")

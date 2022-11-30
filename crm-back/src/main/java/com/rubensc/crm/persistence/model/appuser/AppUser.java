@@ -1,6 +1,7 @@
 package com.rubensc.crm.persistence.model.appuser;
 
 import com.rubensc.crm.persistence.model.opportunity.Opportunity;
+import com.rubensc.crm.persistence.model.plannedaction.PlannedAction;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,6 +36,9 @@ public class AppUser {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Opportunity> opportunityList;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<PlannedAction> plannedActions;
 
     @Override
     public boolean equals(Object o) {

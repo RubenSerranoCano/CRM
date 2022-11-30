@@ -1,7 +1,9 @@
 package com.rubensc.crm.service.opportunity;
 
+import com.rubensc.crm.persistence.model.appuser.AppUser;
 import com.rubensc.crm.persistence.model.opportunity.Opportunity;
 import com.rubensc.crm.persistence.repository.opportunity.OpportunityRepository;
+import com.rubensc.crm.service.appuser.AppUserService;
 import com.rubensc.crm.service.client.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,14 +20,19 @@ public class OpportunityServiceImpl implements OpportunityService {
     @Autowired
     ClientService clientService;
 
+    @Autowired
+    AppUserService appUserService;
+
     @Override
     public Opportunity getOpportunityById(Long opportunityId) {
         return opportunityRepository.findById(opportunityId).orElse(null);
     }
 
     @Override
-    public List<Opportunity> getAllOpportunities() {
-        return opportunityRepository.findAll();
+    public List<Opportunity> getAllOpportunities(Long userId) {
+        AppUser appUser = appUserService.getAppUserById(userId);
+
+        return opportunityRepository.findAllByUser(appUser).orElse(null);
     }
 
     @Override

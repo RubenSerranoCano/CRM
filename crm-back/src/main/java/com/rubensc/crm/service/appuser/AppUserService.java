@@ -9,4 +9,6 @@ public interface AppUserService {
 
     ResponseEntity<AppUser> signup(String email, String rawPassword);
 
+    AppUser getAppUserById(Long userId);
+
 }

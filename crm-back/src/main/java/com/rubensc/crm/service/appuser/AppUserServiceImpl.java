@@ -53,4 +53,9 @@ public class AppUserServiceImpl implements AppUserService {
 
         return ResponseEntity.status(HttpStatus.OK).body(newAppUser);
     }
+
+    @Override
+    public AppUser getAppUserById(Long userId) {
+        return appUserRepository.findById(userId).orElse(null);
+    }
 }

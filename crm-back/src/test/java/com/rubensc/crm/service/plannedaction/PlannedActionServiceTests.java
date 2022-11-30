@@ -63,7 +63,7 @@ public class PlannedActionServiceTests {
     }
 
     /**
-     * Test whether planned actions can be retrieved from the user or not.
+     * Test whether planned actions can be retrieved from a client or not.
      */
     @Test
     void retrievePlannedActionsFromClient() {
@@ -95,7 +95,7 @@ public class PlannedActionServiceTests {
 
         appUserRepository.save(user);
         opportunityService.createOpportunity(mockupOpportunity);
-        plannedActionService.createPlannedAction(plannedAction);
+        plannedActionService.createPlannedAction(mockupClient.getId(), plannedAction);
 
         List<PlannedAction> serviceClientPlannedActions = plannedActionService.getPlannedActionsByClientId(mockupClient.getId());
 
