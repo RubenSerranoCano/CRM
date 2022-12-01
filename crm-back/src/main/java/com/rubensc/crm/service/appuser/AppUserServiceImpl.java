@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @Service
@@ -40,9 +41,16 @@ public class AppUserServiceImpl implements AppUserService {
 
     @Override
     public ResponseEntity<AppUser> signup(String email, String rawPassword) {
+        Optional<AppUser> existingUser = appUserRepository.findByEmail(email);
 
         if (StringUtils.isEmpty(email) || StringUtils.isEmpty(rawPassword)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+
+        if (existingUser.isPresent()) {
+            AppUser sentUser = existingUser.get();
+            sentUser.setPassword("");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(sentUser);
         }
 
         AppUser newAppUser = new AppUser();

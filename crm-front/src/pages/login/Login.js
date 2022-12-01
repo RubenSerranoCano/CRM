@@ -1,6 +1,6 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./login.css";
+import "./Login.css";
 
 function Login() {
   const [loginForm, setLoginForm] = useState({ email: "", password: "" });
@@ -20,14 +20,40 @@ function Login() {
         password: loginForm.password,
       }),
     };
-    fetch("http://localhost:8090/api/v1/login", requestOptions)
-      .then((response) => response)
-      .then((data) => {
-        if (data.ok) {
+    fetch("http://localhost:8090/api/v1/login", requestOptions).then(
+      (response) => {
+        if (response.ok) {
           localStorage.setItem("accessToken", "X5#$Y3hRzkH1");
           navigate("/plannedActions");
         } else {
           setErrorMessage("Invalid user or password");
+        }
+      }
+    );
+  };
+
+  const onSignupHandler = (event) => {
+    event.preventDefault();
+
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: loginForm.email,
+        password: loginForm.password,
+      }),
+    };
+
+    fetch("http://localhost:8090/api/v1/signup", requestOptions)
+      .then((response) => response.json())
+      .then((responseData) => {
+        console.log(responseData);
+        if (responseData.ok) {
+          navigate("/");
+        } else if (responseData.email === loginForm.email && responseData.password === "") {
+          setErrorMessage("You are already signed up");
+        } else {
+          setErrorMessage("Invalid email or password.");
         }
       });
   };
@@ -42,7 +68,8 @@ function Login() {
       <div className="formbg-outer">
         <div className="formbg">
           <div className="formbg-inner padding-horizontal--48">
-            <form id="stripe-login" onSubmit={onLoginHandler}>
+            <form id="stripe-login">
+              <span className="padding-bottom--15">Log in</span>
               <div className="field padding-bottom--24">
                 <label htmlFor="email">Email</label>
                 <input
@@ -72,19 +99,26 @@ function Login() {
                   <input type="checkbox" name="checkbox" /> Remember me
                 </label>
               </div>
-              <div className="field">
-                {errorMessage && (<div>{errorMessage}</div>)}
-              </div>
+              <span className="padding-bottom--15">
+                {errorMessage && <div>{errorMessage}</div>}
+              </span>
               <div className="field padding-bottom--24">
                 <input
                   type="submit"
                   name="submit"
                   value="Log in"
-                  disabled={loginForm.email == "" || loginForm.password == ""}
+                  onClick={onLoginHandler}
+                  disabled={loginForm.email === "" || loginForm.password === ""}
                 />
               </div>
               <div className="field">
-                <input type="button" name="submit" value="Sign up" />
+                <input
+                  type="button"
+                  name="button"
+                  value="Sign up"
+                  onClick={onSignupHandler}
+                  disabled={loginForm.email === "" || loginForm.password === ""}
+                />
               </div>
             </form>
           </div>
