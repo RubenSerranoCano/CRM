@@ -14,12 +14,12 @@ public class PlannedActionController {
     @Autowired
     PlannedActionService plannedActionService;
 
-    @GetMapping("plannedActions")
+    @GetMapping("/plannedActions")
     List<PlannedAction> getAllPlannedActions() {
         return plannedActionService.getAllPlannedActions();
     }
 
-    @PostMapping("plannedAction")
+    @PostMapping("/plannedAction")
     PlannedAction createPlannedAction(@RequestBody PlannedAction plannedAction) {
         return plannedActionService.createPlannedAction(plannedAction);
     }

@@ -14,27 +14,27 @@ public class ClientController {
     @Autowired
     ClientService clientService;
 
-    @GetMapping("clients")
+    @GetMapping("/clients")
     List<Client> getAllClients() {
         return clientService.getAllClients();
     }
 
-    @GetMapping("client")
+    @GetMapping("/client")
     Client getClientById(@RequestParam Long clientId) {
         return clientService.getClientById(clientId);
     }
 
-    @PostMapping("client")
+    @PostMapping("/client")
     Client createClient(@RequestBody Client newClient) {
         return clientService.createClient(newClient);
     }
 
-    @PutMapping("client")
+    @PutMapping("/client")
     Client updateClient(@RequestParam Long clientId, @RequestBody Client updatedClient) {
         return clientService.updateClient(clientId, updatedClient);
     }
 
-    @PutMapping("cancelClient")
+    @PutMapping("/cancelClient")
     Client cancelClient(@RequestParam Long clientId) {
         return clientService.cancelClientById(clientId);
     }

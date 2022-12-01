@@ -16,12 +16,12 @@ public class AppUserController {
     @Autowired
     AppUserService appUserService;
 
-    @PostMapping(path = "login")
+    @PostMapping("/login")
     ResponseEntity<AppUser> login(@RequestBody AppUser userDto) {
         return appUserService.login(userDto.getEmail(), userDto.getPassword());
     }
 
-    @PostMapping(path = "signup")
+    @PostMapping("/signup")
     ResponseEntity<AppUser> signup(@RequestBody AppUser userDto) {
         return appUserService.signup(userDto.getEmail(), userDto.getPassword());
     }

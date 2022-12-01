@@ -17,7 +17,7 @@ public class OpportunityController {
     @Autowired
     OpportunityService opportunityService;
 
-    @GetMapping("opportunities")
+    @GetMapping("/opportunities")
     List<Opportunity> getAllUserOpportunities() {
        return opportunityService.getAllOpportunities();
     }

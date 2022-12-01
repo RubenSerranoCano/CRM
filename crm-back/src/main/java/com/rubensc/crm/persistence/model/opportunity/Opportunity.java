@@ -53,11 +53,9 @@ public class Opportunity {
         return "Opportunity{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", client=" + client +
                 ", plannedActionList=" + plannedActionList +
                 ", statusType=" + statusType +
                 ", creationDateTime=" + creationDateTime +
-                ", user=" + user +
                 '}';
     }
 

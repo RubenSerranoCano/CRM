@@ -42,10 +42,6 @@ public class PlannedAction {
     @NotNull
     LocalDateTime creationDateTime;
 
-//    @ManyToOne(cascade = CascadeType.MERGE)
-//    @JoinColumn(name = "user")
-//    AppUser user;
-
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "opportunity")
     Opportunity opportunity;
@@ -63,8 +59,6 @@ public class PlannedAction {
                 ", statusType=" + statusType +
                 ", dueDateTime=" + dueDateTime +
                 ", creationDateTime=" + creationDateTime +
-                ", opportunity=" + opportunity +
-                ", client=" + client +
                 '}';
     }
 
