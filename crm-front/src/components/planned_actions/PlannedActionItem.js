@@ -3,7 +3,7 @@ import classes from "./PlannedActionItem.module.css";
 import Moment from "moment";
 
 function PlannedActionItem(props) {
-  const formattedDate = Moment(props.dueDateTime).format(
+  const formattedDueDateTime = Moment(props.dueDateTime).format(
     "MMM Do YYYY @ HH:mm:ss"
   );
 
@@ -18,7 +18,7 @@ function PlannedActionItem(props) {
           <h3>
             {props.actionType} - {props.statusType}
           </h3>
-          <h3>{formattedDate}</h3>
+          <h3>{formattedDueDateTime}</h3>
           <div className={classes.actions}>
             <button>Cancel</button>
           </div>

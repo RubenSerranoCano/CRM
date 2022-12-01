@@ -34,7 +34,6 @@ function PlannedActions() {
     return (
       <Layout>
         <h1>Planned actions</h1>
-        <span>...</span>
       </Layout>
     );
   }

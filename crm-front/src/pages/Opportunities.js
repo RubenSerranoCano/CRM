@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import PlannedActionList from "../components/planned_actions/PlannedActionList";
+import OpportunityList from "../components/opportunities/OpportunityList";
 import Layout from "../layout/Layout";
 
 function Opportunities() {
@@ -34,7 +34,6 @@ function Opportunities() {
     return (
       <Layout>
         <h1>Opportunities</h1>
-        <span>...</span>
       </Layout>
     );
   }
@@ -43,18 +42,7 @@ function Opportunities() {
     <Layout>
       <section>
           <h1>Opportunities</h1>
-          <div style={{ display: "flex", justifyContent: "left" }}>
-            <div className="field" style={{margin: "10px"}}>
-              <input type="button" name="list" value="List" />
-            </div>
-            <div className="field" style={{margin: "10px"}}>
-              <input type="button" name="list" value="Tree" />
-            </div>
-            <div className="field" style={{margin: "10px"}}>
-              <input type="button" name="list" value="Kanban" />
-            </div>
-          </div>
-        <OpportunitiyList opportunities={loadedOpportunities} />
+        <OpportunityList opportunities={loadedOpportunities} />
       </section>
     </Layout>
   );
