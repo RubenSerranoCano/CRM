@@ -2,23 +2,6 @@ h1 {
   letter-spacing: -1px;
 }
 
-.login-root {
-  background: #fff;
-  display: flex;
-  width: 100%;
-  min-height: 100vh;
-  overflow: hidden;
-}
-.loginbackground {
-  min-height: 692px;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  top: 0;
-  z-index: 0;
-  overflow: hidden;
-}
 .flex-flex {
   display: flex;
 }

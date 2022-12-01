@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import OpportunityList from "../components/opportunities/OpportunityList";
 import Layout from "../layout/Layout";
+import classes from "./Opportunities.module.css";
 
 function Opportunities() {
   const [isLoading, setLoading] = useState(true);
@@ -40,10 +41,8 @@ function Opportunities() {
 
   return (
     <Layout>
-      <section>
-          <h1>Opportunities</h1>
+          <h1 className={classes}>Opportunities</h1>
         <OpportunityList opportunities={loadedOpportunities} />
-      </section>
     </Layout>
   );
 }

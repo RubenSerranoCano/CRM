@@ -40,7 +40,6 @@ function PlannedActions() {
 
   return (
     <Layout>
-      <section>
           <h1>Planned actions</h1>
           <div style={{ display: "flex", justifyContent: "left" }}>
             <div className="field" style={{margin: "10px"}}>
@@ -54,7 +53,6 @@ function PlannedActions() {
             </div>
           </div>
         <PlannedActionList plannedActions={loadedPlannedActions} />
-      </section>
     </Layout>
   );
 }

@@ -34,20 +34,20 @@
 }
 
 .actions {
-  margin-top: 1rem;
-  padding: 0.5rem;
+  padding: 1rem;
   text-align: left;
   text-transform: uppercase;
   border-radius: 4px;
 }
 
-.actions button {
+.button {
   font: inherit;
   cursor: pointer;
   color: #77002e;
   border: 1px solid #77002e;
   background-color: transparent;
   padding: 0.5rem;
+  margin-top: 1rem;
   border-radius: 4px;
 }
 

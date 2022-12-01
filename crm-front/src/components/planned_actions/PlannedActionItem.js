@@ -19,9 +19,7 @@ function PlannedActionItem(props) {
             {props.actionType} - {props.statusType}
           </h3>
           <h3>{formattedDueDateTime}</h3>
-          <div className={classes.actions}>
-            <button>Cancel</button>
-          </div>
+          <button className={classes.button}>Cancel</button>
         </div>
       </Card>
     </li>
