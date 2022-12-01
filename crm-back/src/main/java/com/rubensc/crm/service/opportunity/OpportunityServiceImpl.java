@@ -21,21 +21,33 @@ public class OpportunityServiceImpl implements OpportunityService {
     @Autowired
     ClientService clientService;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Opportunity getOpportunityById(Long opportunityId) {
         return opportunityRepository.findById(opportunityId).orElse(null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Opportunity> getAllOpportunities() {
         return opportunityRepository.findAll();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Opportunity createOpportunity(Opportunity newOpportunity) {
         return opportunityRepository.save(newOpportunity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Opportunity updateOpportunity(Long opportunityId, Opportunity updatedOpportunity) {
         Optional<Opportunity> optionalPreviousOpportunity = opportunityRepository.findById(opportunityId);
@@ -49,6 +61,9 @@ public class OpportunityServiceImpl implements OpportunityService {
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Opportunity discardOpportunity(Long opportunityId) {
         Optional<Opportunity> optionalOpportunity = opportunityRepository.findById(opportunityId);
@@ -68,6 +83,9 @@ public class OpportunityServiceImpl implements OpportunityService {
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Opportunity> getOpportunitiesByClientId(Long clientId) {
         return clientService.getClientById(clientId).getOpportunityList();

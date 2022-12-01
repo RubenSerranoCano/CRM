@@ -21,7 +21,9 @@ public class AppUserServiceImpl implements AppUserService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ResponseEntity<AppUser> login(String email, String rawPassword) {
         Optional<AppUser> optionalAppUser = appUserRepository.findByEmail(email);
@@ -39,6 +41,9 @@ public class AppUserServiceImpl implements AppUserService {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ResponseEntity<AppUser> signup(String email, String rawPassword) {
         Optional<AppUser> existingUser = appUserRepository.findByEmail(email);
@@ -62,6 +67,9 @@ public class AppUserServiceImpl implements AppUserService {
         return ResponseEntity.status(HttpStatus.OK).body(newAppUser);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public AppUser getAppUserById(Long userId) {
         return appUserRepository.findById(userId).orElse(null);

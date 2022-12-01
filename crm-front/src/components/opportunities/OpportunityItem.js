@@ -15,27 +15,29 @@ function OpportunityItem(props) {
         </div>
         <h3>Planned actions</h3>
         <table>
-          <tr>
-            <th>Action</th>
-            <th>Description</th>
-            <th>statusType</th>
-            <th>Due</th>
-            <th>Client</th>
-          </tr>
-          {props.plannedActionList.map((plannedAction) => {
-            const formattedDueDateTime = Moment(props.dueDateTime).format(
+          <tbody>
+            <tr>
+              <th>Action</th>
+              <th>Description</th>
+              <th>statusType</th>
+              <th>Due</th>
+              <th>Client</th>
+            </tr>
+            {props.plannedActionList?.map((plannedAction) => {
+              const formattedDueDateTime = Moment(props.dueDateTime).format(
                 "MMM Do YYYY @ HH:mm:ss"
               );
-            return (
-              <tr>
-                <td>{plannedAction.actionType}</td>
-                <td>{plannedAction.description}</td>
-                <td>{plannedAction.statusType}</td>
-                <td>{formattedDueDateTime}</td>
-                <td>{plannedAction.client?.name}</td>
-              </tr>
-            );
-          })}
+              return (
+                <tr>
+                  <td>{plannedAction.actionType}</td>
+                  <td>{plannedAction.description}</td>
+                  <td>{plannedAction.statusType}</td>
+                  <td>{formattedDueDateTime}</td>
+                  <td>{plannedAction.client?.name}</td>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
       </Card>
     </li>

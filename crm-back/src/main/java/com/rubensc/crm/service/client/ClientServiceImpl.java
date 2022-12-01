@@ -18,24 +18,36 @@ public class ClientServiceImpl implements ClientService {
     @Autowired
     ClientRepository clientRepository;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Client getClientById(Long clientId) {
         return clientRepository.findById(clientId).orElse(null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Client> getAllClients() {
         return clientRepository.findAll();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Client createClient(Client newClient) {
 
         validateNewClient(newClient);
-        System.out.println("create client: "+newClient.getPlannedActionList());
+
         return clientRepository.save(newClient);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Client updateClient(Long clientId, Client updatedClient) {
         Optional<Client> optionalPreviousClient = clientRepository.findById(clientId);
@@ -49,6 +61,9 @@ public class ClientServiceImpl implements ClientService {
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Client cancelClientById(Long clientId) {
         Optional<Client> optionalClient = clientRepository.findById(clientId);
@@ -60,6 +75,9 @@ public class ClientServiceImpl implements ClientService {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<PlannedAction> getClientPlannedActions(Long clientId) {
         Optional<Client> optionalClient = clientRepository.findById(clientId);

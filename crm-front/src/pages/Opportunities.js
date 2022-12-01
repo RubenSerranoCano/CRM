@@ -17,12 +17,12 @@ function Opportunities() {
           const opportunities = [];
 
           for (const e in responseData) {
-            const opportunities = {
+            const opportunity = {
               id: e,
               ...responseData[e],
             };
 
-            opportunities.push(opportunities);
+            opportunities.push(opportunity);
           }
 
           setLoading(false);

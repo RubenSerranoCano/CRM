@@ -26,22 +26,33 @@ public class PlannedActionServiceImpl implements PlannedActionService {
     @Autowired
     AppUserService appUserService;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-
     public PlannedAction getPlannedActionById(Long plannedActionId) {
         return plannedActionRepository.findById(plannedActionId).orElse(null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<PlannedAction> getAllPlannedActions() {
         return plannedActionRepository.findAll();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public PlannedAction createPlannedAction(PlannedAction newPlannedAction) {
         return plannedActionRepository.save(newPlannedAction);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public PlannedAction updatePlannedAction(Long plannedActionId, PlannedAction updatedPlannedAction) {
         Optional<PlannedAction> optionalPreviousPlannedAction = plannedActionRepository.findById(plannedActionId);
@@ -55,11 +66,9 @@ public class PlannedActionServiceImpl implements PlannedActionService {
         return null;
     }
 
-    @Override
-    public PlannedAction discardPlannedAction(Long plannedActionId) {
-        return null;
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<PlannedAction> getPlannedActionsByClientId(Long clientId) {
         return clientService.getClientById(clientId).getPlannedActionList();
