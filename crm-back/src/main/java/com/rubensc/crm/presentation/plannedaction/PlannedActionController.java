@@ -15,8 +15,8 @@ public class PlannedActionController {
     PlannedActionService plannedActionService;
 
     @GetMapping("plannedActions")
-    List<PlannedAction> getAllPlannedActions(@RequestParam Long userId) {
-        return plannedActionService.getAllPlannedActions(userId);
+    List<PlannedAction> getAllPlannedActions() {
+        return plannedActionService.getAllPlannedActions();
     }
 
     @PostMapping("plannedAction")

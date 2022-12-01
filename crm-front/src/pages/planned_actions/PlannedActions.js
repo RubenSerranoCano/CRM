@@ -1,5 +1,11 @@
+import Layout from "../../layout/Layout";
+
 function PlannedActions() {
-    return (<div>Planned actions</div>)
+  return (
+    <Layout>
+      <h1>Planned actions</h1>
+    </Layout>
+  );
 }
 
 export default PlannedActions;

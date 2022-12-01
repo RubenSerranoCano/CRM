@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface PlannedActionService {
     PlannedAction getPlannedActionById(Long plannedActionId);
-    List<PlannedAction> getAllPlannedActions(Long userId);
+    List<PlannedAction> getAllPlannedActions();
     PlannedAction createPlannedAction(PlannedAction newPlannedAction);
     PlannedAction updatePlannedAction(Long plannedActionId, PlannedAction updatedPlannedAction);
     PlannedAction discardPlannedAction(Long plannedActionId);

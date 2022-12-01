@@ -33,7 +33,7 @@ public class PlannedActionServiceImpl implements PlannedActionService {
     }
 
     @Override
-    public List<PlannedAction> getAllPlannedActions(Long userId) {
+    public List<PlannedAction> getAllPlannedActions() {
         return plannedActionRepository.findAll();
     }
 
