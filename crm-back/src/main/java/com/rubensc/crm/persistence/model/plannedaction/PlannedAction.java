@@ -1,6 +1,7 @@
 package com.rubensc.crm.persistence.model.plannedaction;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rubensc.crm.persistence.model.appuser.AppUser;
 import com.rubensc.crm.persistence.model.client.Client;
 import com.rubensc.crm.persistence.model.opportunity.Opportunity;
@@ -42,6 +43,7 @@ public class PlannedAction {
     @NotNull
     LocalDateTime creationDateTime;
 
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "opportunity")
     Opportunity opportunity;
