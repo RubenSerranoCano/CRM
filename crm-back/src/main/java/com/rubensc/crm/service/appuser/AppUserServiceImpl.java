@@ -3,6 +3,7 @@ package com.rubensc.crm.service.appuser;
 import com.rubensc.crm.persistence.model.appuser.AppUser;
 import com.rubensc.crm.persistence.repository.appuser.AppUserRepository;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.swing.text.html.Option;
+import javax.validation.constraints.Pattern;
 import java.util.Optional;
 
 @Service
@@ -52,6 +54,10 @@ public class AppUserServiceImpl implements AppUserService {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
 
+        if (!rawPassword.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$")) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new AppUser());
+        }
+
         if (existingUser.isPresent()) {
             AppUser sentUser = existingUser.get();
             sentUser.setPassword("");
@@ -63,7 +69,6 @@ public class AppUserServiceImpl implements AppUserService {
         newAppUser.setPassword(passwordEncoder.encode(rawPassword));
 
         appUserRepository.save(newAppUser);
-
         return ResponseEntity.status(HttpStatus.OK).body(newAppUser);
     }
 

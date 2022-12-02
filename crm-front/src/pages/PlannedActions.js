@@ -40,7 +40,7 @@ function PlannedActions() {
 
   return (
     <Layout>
-          <h1>Planned actions</h1>
+          <h1 name="plannedActions-header">Planned actions</h1>
           <div style={{ display: "flex", justifyContent: "left" }}>
             <div className="field" style={{margin: "10px"}}>
               <input type="button" name="list" value="List" />

@@ -6,7 +6,7 @@ import "./Login.css";
 function Login() {
   const [loginForm, setLoginForm] = useState({ email: "", password: "" });
 
-  const [errorMessage, setErrorMessage] = useState();
+  const [infoMessage, setInfoMessage] = useState();
 
   const navigate = useNavigate();
 
@@ -27,7 +27,7 @@ function Login() {
           localStorage.setItem("accessToken", "X5#$Y3hRzkH1");
           navigate("/plannedActions");
         } else {
-          setErrorMessage("Invalid user or password");
+          setInfoMessage("Invalid user or password");
         }
       }
     );
@@ -49,15 +49,11 @@ function Login() {
       .then((response) => response.json())
       .then((responseData) => {
         console.log(responseData);
-        if (responseData.ok) {
+        if (responseData.id != null) {
           navigate("/");
-        } else if (
-          responseData.email === loginForm.email &&
-          responseData.password === ""
-        ) {
-          setErrorMessage("You are already signed up");
-        } else {
-          setErrorMessage("Invalid email or password.");
+          setInfoMessage("You are signed up");
+        } else if (responseData.id == null) {
+          setInfoMessage("Too weak of a password, try another");
         }
       });
   };
@@ -80,6 +76,8 @@ function Login() {
                   <input
                     type="email"
                     name="email"
+                    label="email"
+                    placeholder="email@example.com"
                     onChange={(e) => {
                       setLoginForm({ ...loginForm, email: e.target.value });
                     }}
@@ -93,6 +91,8 @@ function Login() {
                   <input
                     type="password"
                     name="password"
+                    label="password"
+                    placeholder="********"
                     onChange={(e) => {
                       setLoginForm({ ...loginForm, password: e.target.value });
                     }}
@@ -105,12 +105,12 @@ function Login() {
                   </label>
                 </div>
                 <span className="padding-bottom--15">
-                  {errorMessage && <div>{errorMessage}</div>}
+                  {infoMessage && <div name="info-message">{infoMessage}</div>}
                 </span>
                 <div className="field padding-bottom--24">
                   <input
                     type="submit"
-                    name="submit"
+                    name="login"
                     value="Log in"
                     onClick={onLoginHandler}
                     disabled={
@@ -121,7 +121,7 @@ function Login() {
                 <div className="field">
                   <input
                     type="button"
-                    name="button"
+                    name="signup"
                     value="Sign up"
                     onClick={onSignupHandler}
                     disabled={
