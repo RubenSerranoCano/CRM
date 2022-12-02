@@ -29,6 +29,7 @@ public class AppUser {
     @Email
     @NotNull
     @Size(max = 50)
+    @Column(unique = true)
     private String email;
 
     @NotNull
