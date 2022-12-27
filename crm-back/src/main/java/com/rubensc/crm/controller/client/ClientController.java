@@ -1,4 +1,4 @@
-package com.rubensc.crm.presentation.client;
+package com.rubensc.crm.controller.client;
 
 import com.rubensc.crm.persistence.model.client.Client;
 import com.rubensc.crm.service.client.ClientService;

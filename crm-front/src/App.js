@@ -6,8 +6,7 @@ import Opportunities from "./pages/Opportunities";
 import PlannedActions from "./pages/PlannedActions";
 
 function App() {
-  const isAuthenticated =
-    localStorage.getItem("accessToken") === "X5#$Y3hRzkH1";
+  const isAuthenticated = !!localStorage.getItem("accessToken");
 
   return (
     <BrowserRouter>

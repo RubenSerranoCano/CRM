@@ -9,7 +9,11 @@ function PlannedActions() {
 
   useEffect(() => {
     setLoading(true);
-    fetch("http://localhost:8090/api/v1/plannedActions")
+    console.log(localStorage.getItem("accessToken"))
+    const requestOptions = {
+      headers: {"Content-Type": "application/json", "Authorization": "Bearer " + localStorage.getItem("accessToken")},
+    };
+    fetch("http://localhost:8090/api/v1/plannedActions", requestOptions)
       .then((response) => response.json())
       .then((responseData) => {
         if (responseData) {
@@ -40,19 +44,19 @@ function PlannedActions() {
 
   return (
     <Layout>
-          <h1 name="plannedActions-header">Planned actions</h1>
-          <div style={{ display: "flex", justifyContent: "left" }}>
-            <div className="field" style={{margin: "10px"}}>
-              <input type="button" name="list" value="List" />
-            </div>
-            <div className="field" style={{margin: "10px"}}>
-              <input type="button" name="list" value="Tree" />
-            </div>
-            <div className="field" style={{margin: "10px"}}>
-              <input type="button" name="list" value="Kanban" />
-            </div>
-          </div>
-        <PlannedActionList plannedActions={loadedPlannedActions} />
+      <h1 name="plannedActions-header">Planned actions</h1>
+      <div style={{ display: "flex", justifyContent: "left" }}>
+        <div className="field" style={{ margin: "10px" }}>
+          <input type="button" name="list" value="List" />
+        </div>
+        <div className="field" style={{ margin: "10px" }}>
+          <input type="button" name="list" value="Tree" />
+        </div>
+        <div className="field" style={{ margin: "10px" }}>
+          <input type="button" name="list" value="Kanban" />
+        </div>
+      </div>
+      <PlannedActionList plannedActions={loadedPlannedActions} />
     </Layout>
   );
 }

@@ -4,7 +4,7 @@ import Layout from "../layout/Layout";
 import "./Login.css";
 
 function Login() {
-  const [loginForm, setLoginForm] = useState({ email: "", password: "" });
+  const [loginForm, setLoginForm] = useState({ email: "", username: "", password: "" });
 
   const [infoMessage, setInfoMessage] = useState();
 
@@ -15,22 +15,24 @@ function Login() {
 
     const requestOptions = {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {"Content-Type": "application/json", "Authorization": "Bearer "},
       body: JSON.stringify({
         email: loginForm.email,
-        password: loginForm.password,
+        username: loginForm.username,
+        password: loginForm.password
       }),
     };
-    fetch("http://localhost:8090/api/v1/login", requestOptions).then(
-      (response) => {
-        if (response.ok) {
-          localStorage.setItem("accessToken", "X5#$Y3hRzkH1");
-          navigate("/plannedActions");
-        } else {
-          setInfoMessage("Invalid user or password");
-        }
+    fetch("http://localhost:8090/api/v1/authenticate", requestOptions)
+    .then((response) => response.json())
+    .then((responseData) => {
+      if (responseData != null) {
+        console.log(responseData.token);
+        localStorage.setItem("accessToken", responseData.token); //X5#$Y3hRzkH1
+        navigate("/plannedActions");
+      } else {
+        setInfoMessage("Invalid user or password");
       }
-    );
+    });
   };
 
   const onSignupHandler = (event) => {
@@ -38,10 +40,11 @@ function Login() {
 
     const requestOptions = {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {"Content-Type": "application/json", "Authorization": "Bearer "},
       body: JSON.stringify({
         email: loginForm.email,
-        password: loginForm.password,
+        username: loginForm.username,
+        password: loginForm.password
       }),
     };
 
@@ -80,6 +83,19 @@ function Login() {
                     placeholder="email@example.com"
                     onChange={(e) => {
                       setLoginForm({ ...loginForm, email: e.target.value });
+                    }}
+                    required
+                  />
+                </div>
+                <div className="field padding-bottom--24">
+                  <label htmlFor="username">Username</label>
+                  <input
+                    type="text"
+                    name="username"
+                    label="Username"
+                    placeholder="John Doe"
+                    onChange={(e) => {
+                      setLoginForm({ ...loginForm, username: e.target.value });
                     }}
                     required
                   />

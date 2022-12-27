@@ -2,7 +2,7 @@ package com.rubensc.crm.persistence.model.plannedaction;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
-public enum ActionType {
+public enum PlannedActionType {
     EMAIL,
     PHONE_CALL,
     SALES_VISIT,
@@ -10,8 +10,8 @@ public enum ActionType {
     ONLINE_MEETING;
 
     @JsonCreator
-    public static ActionType fromText(String text) {
-        for (ActionType e : ActionType.values()) {
+    public static PlannedActionType fromText(String text) {
+        for (PlannedActionType e : PlannedActionType.values()) {
             if (String.valueOf(e.name()).equals(text)) {
                 return e;
             }

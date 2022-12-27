@@ -2,7 +2,6 @@ package com.rubensc.crm.persistence.model.plannedaction;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.rubensc.crm.persistence.model.appuser.AppUser;
 import com.rubensc.crm.persistence.model.client.Client;
 import com.rubensc.crm.persistence.model.opportunity.Opportunity;
 import lombok.Getter;
@@ -29,7 +28,7 @@ public class PlannedAction {
     Long id;
 
     @Enumerated(EnumType.STRING)
-    ActionType actionType;
+    PlannedActionType actionType;
 
     @Size(max = 120)
     String description;

@@ -25,7 +25,7 @@ public class AppUserServiceTests {
     @Test
     void signupEncodesPassword() {
         String rawPassword = "X5#$Y3hRzkH1";
-        AppUser appUserResponse = appUserService.signup("test@email.com", rawPassword).getBody();
+        AppUser appUserResponse = appUserService.signup("test@email.com", "test", rawPassword).getBody();
 
         Assertions.assertNotEquals(rawPassword, appUserResponse.getPassword());
     }

@@ -33,6 +33,11 @@ public class AppUser {
     private String email;
 
     @NotNull
+    @Size(max = 30)
+    @Column(unique = true)
+    private String username;
+
+    @NotNull
     @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$", message = "The password is invalid")
     private String password;
 

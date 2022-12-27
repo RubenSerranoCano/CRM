@@ -3,15 +3,12 @@ package com.rubensc.crm.service.appuser;
 import com.rubensc.crm.persistence.model.appuser.AppUser;
 import com.rubensc.crm.persistence.repository.appuser.AppUserRepository;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
-import javax.validation.constraints.Pattern;
 import java.util.Optional;
 
 @Service
@@ -27,27 +24,7 @@ public class AppUserServiceImpl implements AppUserService {
      * {@inheritDoc}
      */
     @Override
-    public ResponseEntity<AppUser> login(String email, String rawPassword) {
-        Optional<AppUser> optionalAppUser = appUserRepository.findByEmail(email);
-
-        if (optionalAppUser.isPresent()) {
-            AppUser appUser = optionalAppUser.get();
-
-            if (passwordEncoder.matches(rawPassword, appUser.getPassword())) {
-                return ResponseEntity.status(HttpStatus.OK).body(appUser);
-            } else {
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
-            }
-
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ResponseEntity<AppUser> signup(String email, String rawPassword) {
+    public ResponseEntity<AppUser> signup(String email, String username, String rawPassword) {
         Optional<AppUser> existingUser = appUserRepository.findByEmail(email);
 
         if (StringUtils.isEmpty(email) || StringUtils.isEmpty(rawPassword)) {
@@ -66,6 +43,7 @@ public class AppUserServiceImpl implements AppUserService {
 
         AppUser newAppUser = new AppUser();
         newAppUser.setEmail(email);
+        newAppUser.setUsername(username);
         newAppUser.setPassword(passwordEncoder.encode(rawPassword));
 
         appUserRepository.save(newAppUser);
@@ -78,5 +56,10 @@ public class AppUserServiceImpl implements AppUserService {
     @Override
     public AppUser getAppUserById(Long userId) {
         return appUserRepository.findById(userId).orElse(null);
+    }
+
+    @Override
+    public AppUser getAppUserByUsername(String username) {
+        return appUserRepository.findByUsername(username).orElse(null);
     }
 }

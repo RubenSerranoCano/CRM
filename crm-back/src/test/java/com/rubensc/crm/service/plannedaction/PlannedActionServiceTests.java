@@ -4,7 +4,7 @@ import com.rubensc.crm.persistence.model.client.Client;
 import com.rubensc.crm.persistence.model.client.ClientStatusType;
 import com.rubensc.crm.persistence.model.opportunity.Opportunity;
 import com.rubensc.crm.persistence.model.opportunity.OpportunityStatusType;
-import com.rubensc.crm.persistence.model.plannedaction.ActionType;
+import com.rubensc.crm.persistence.model.plannedaction.PlannedActionType;
 import com.rubensc.crm.persistence.model.plannedaction.PlannedAction;
 import com.rubensc.crm.persistence.model.plannedaction.PlannedActionStatusType;
 import com.rubensc.crm.persistence.model.appuser.AppUser;
@@ -72,7 +72,7 @@ public class PlannedActionServiceTests {
         user.setPassword("password");
 
         PlannedAction plannedAction = new PlannedAction();
-        plannedAction.setActionType(ActionType.EMAIL);
+        plannedAction.setActionType(PlannedActionType.EMAIL);
         plannedAction.setStatusType(PlannedActionStatusType.DUE);
         plannedAction.setCreationDateTime(LocalDateTime.of(2022, 11, 30, 0, 0));
         plannedAction.setClient(mockupClient);

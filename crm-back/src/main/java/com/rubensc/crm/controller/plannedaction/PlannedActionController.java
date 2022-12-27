@@ -1,4 +1,4 @@
-package com.rubensc.crm.presentation.plannedaction;
+package com.rubensc.crm.controller.plannedaction;
 
 import com.rubensc.crm.persistence.model.plannedaction.PlannedAction;
 import com.rubensc.crm.service.plannedaction.PlannedActionService;

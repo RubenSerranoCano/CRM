@@ -5,23 +5,20 @@ import com.rubensc.crm.persistence.model.client.Client;
 import com.rubensc.crm.persistence.model.client.ClientStatusType;
 import com.rubensc.crm.persistence.model.opportunity.Opportunity;
 import com.rubensc.crm.persistence.model.opportunity.OpportunityStatusType;
-import com.rubensc.crm.persistence.model.plannedaction.ActionType;
+import com.rubensc.crm.persistence.model.plannedaction.PlannedActionType;
 import com.rubensc.crm.persistence.model.plannedaction.PlannedAction;
 import com.rubensc.crm.persistence.model.plannedaction.PlannedActionStatusType;
 import com.rubensc.crm.persistence.repository.appuser.AppUserRepository;
 import com.rubensc.crm.persistence.repository.client.ClientRepository;
 import com.rubensc.crm.persistence.repository.opportunity.OpportunityRepository;
 import com.rubensc.crm.service.client.ClientService;
-import com.rubensc.crm.service.opportunity.OpportunityService;
 import com.rubensc.crm.service.plannedaction.PlannedActionService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.validation.constraints.AssertTrue;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +75,7 @@ public class OpportunityServiceTests {
         user.setPassword("password");
 
         PlannedAction plannedAction = new PlannedAction();
-        plannedAction.setActionType(ActionType.EMAIL);
+        plannedAction.setActionType(PlannedActionType.EMAIL);
         plannedAction.setStatusType(PlannedActionStatusType.DUE);
         plannedAction.setCreationDateTime(LocalDateTime.of(2022, 11, 30, 0, 0));
         plannedAction.setClient(mockupClient);

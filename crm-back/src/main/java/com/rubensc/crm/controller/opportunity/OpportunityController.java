@@ -1,4 +1,4 @@
-package com.rubensc.crm.presentation.opportunity;
+package com.rubensc.crm.controller.opportunity;
 
 import com.rubensc.crm.persistence.model.opportunity.Opportunity;
 import com.rubensc.crm.service.opportunity.OpportunityService;
