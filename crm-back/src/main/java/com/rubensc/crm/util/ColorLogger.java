@@ -28,16 +28,16 @@ public class ColorLogger {
     public ColorLogger() {
     }
 
-    public void info(String message) {
-        LOGGER.info(reset + message + reset);
+    public static void info(String message) {
+        LOGGER.info(cyan + message + reset);
     }
-    public void warn(String message) {
+    public static void warn(String message) {
         LOGGER.warn(yellow + message + reset);
     }
-    public void debug(String message) {
-        LOGGER.debug(blue + message + reset);
+    public static void debug(String message) {
+        LOGGER.debug(green + message + reset);
     }
-    public void error(String message) {
+    public static void error(String message) {
         LOGGER.error(red + message + reset);
     }
 

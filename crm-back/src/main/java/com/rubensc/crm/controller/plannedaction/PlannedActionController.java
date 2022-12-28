@@ -2,7 +2,9 @@ package com.rubensc.crm.controller.plannedaction;
 
 import com.rubensc.crm.persistence.model.plannedaction.PlannedAction;
 import com.rubensc.crm.service.plannedaction.PlannedActionService;
+import com.rubensc.crm.util.ColorLogger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,7 +17,9 @@ public class PlannedActionController {
     PlannedActionService plannedActionService;
 
     @GetMapping("/plannedActions")
-    List<PlannedAction> getAllPlannedActions() {
+    List<PlannedAction> getAllPlannedActions(Authentication auth) {
+        String username = auth.getName();
+        ColorLogger.info("Username to filter requests: " + username);
         return plannedActionService.getAllPlannedActions();
     }
 

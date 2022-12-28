@@ -1,6 +1,7 @@
 package com.rubensc.crm.configuration;
 
 import com.rubensc.crm.service.jwtuserdetails.JwtUserDetailsService;
+import com.rubensc.crm.util.ColorLogger;
 import com.rubensc.crm.util.JwtTokenUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +36,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         String username = null;
         String jwtToken = null;
         // JWT Token is in the form "Bearer token". Remove Bearer word and get
-        // only the Token
+        // only the token
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
             jwtToken = requestTokenHeader.substring("Bearer ".length());
             try {
                 username = jwtTokenUtil.getUsernameFromToken(jwtToken);
-                logger.info("Token is present, username: " + username);
+                ColorLogger.info("Token is present, username: " + username);
 
             } catch (IllegalArgumentException e) {
                 System.out.println("Unable to get JWT Token");
@@ -48,8 +49,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 System.out.println("JWT Token has expired");
             }
         } else {
-            logger.warn("JWT Token does not begin with Bearer String");
+            ColorLogger.warn("JWT Token does not begin with Bearer String");
         }
+
 
         // Once we get the token validate it.
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -58,6 +60,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
             // if token is valid configure Spring Security to manually set
             // authentication
+            ColorLogger.info("Is token valid? " + jwtTokenUtil.validateToken(jwtToken, userDetails));
             if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
 
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
@@ -68,6 +71,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 // that the current user is authenticated. So it passes the
                 // Spring Security Configurations successfully.
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+                ColorLogger.info("User '"+ username + "' has been authenticated");
             }
         }
         chain.doFilter(request, response);

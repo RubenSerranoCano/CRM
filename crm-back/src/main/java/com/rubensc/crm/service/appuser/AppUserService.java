@@ -18,28 +18,29 @@ public interface AppUserService {
 
     /**
      * Stores a user in the system with the given data.
-     * @param email email to be set in the new user
+     *
+     * @param username    user's username
+     * @param email       email to be set in the new user
      * @param rawPassword password to set in the new user once it's encoded.
      * @return a response entity with a response and the entity.
-     *
      * @author Rubén Serrano Cano
      */
-    ResponseEntity<AppUser> signup(String email, String username, String rawPassword);
+    ResponseEntity<AppUser> signup(String username, String email, String rawPassword);
 
     /**
      * Retrieves the appUser given its id.
+     *
      * @param userId the appUser id.
      * @return the found appUser.
-     *
      * @author Rubén Serrano Cano
      */
     AppUser getAppUserById(Long userId);
 
     /**
      * Retrieves the appUser given its username.
+     *
      * @param username the appUser username.
      * @return the found appUser.
-     *
      * @author Rubén Serrano Cano
      */
     AppUser getAppUserByUsername(String username);

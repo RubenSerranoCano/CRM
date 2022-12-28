@@ -26,16 +26,16 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
+    @Size(max = 30)
+    @Column(unique = true)
+    private String username;
+
     @Email
     @NotNull
     @Size(max = 50)
     @Column(unique = true)
     private String email;
-
-    @NotNull
-    @Size(max = 30)
-    @Column(unique = true)
-    private String username;
 
     @NotNull
     @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$", message = "The password is invalid")

@@ -24,7 +24,7 @@ public class AppUserServiceImpl implements AppUserService {
      * {@inheritDoc}
      */
     @Override
-    public ResponseEntity<AppUser> signup(String email, String username, String rawPassword) {
+    public ResponseEntity<AppUser> signup(String username, String email, String rawPassword) {
         Optional<AppUser> existingUser = appUserRepository.findByEmail(email);
 
         if (StringUtils.isEmpty(email) || StringUtils.isEmpty(rawPassword)) {
@@ -42,8 +42,8 @@ public class AppUserServiceImpl implements AppUserService {
         }
 
         AppUser newAppUser = new AppUser();
-        newAppUser.setEmail(email);
         newAppUser.setUsername(username);
+        newAppUser.setEmail(email);
         newAppUser.setPassword(passwordEncoder.encode(rawPassword));
 
         appUserRepository.save(newAppUser);
