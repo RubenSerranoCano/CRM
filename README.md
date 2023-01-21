@@ -30,7 +30,7 @@ A web page has been made with the React library in order to fulfill the assessme
 ***
 **Layered (MVC) back end**
 
-A Spring Boot application has been developed to enable data management and scalability. This application is structure in the following layers, each one with a single responsibility:
+A Spring Boot application has been developed to enable data management and scalability. This application is structured in the following layers, each one with a single responsibility:
 
  - Presentation: layer meant to enable communication between the front end and the services. This package contains REST Controllers. As a proof of concept, the *client* controller contains a controller advice to act as a middleman and return a response status and body whenever a custom exception is thrown.
  - Service: this is where the business logic takes place, is in charge of receiving data from the REST controller in order to manipulate it and allow its storage thanks to the repository layer. As a design rule, services can only be used by REST controllers and other services.
@@ -38,11 +38,11 @@ A Spring Boot application has been developed to enable data management and scala
 ***
 **Test driven development**
 
-The back end services have been designed through test driven development. First the test to be passed was designed, then the service interface was written, after that, the test was failed on purpose to prove the lack of implementation and finally the service was implemented to pass the test.
+The back end services have been designed through test driven development. First the test to be passed were designed, then the service interface was written, after that, the test were failed on purpose to prove the lack of implementation and finally the service was implemented to pass the test.
 ****
 **Password encoding**
 
-For security reasons, the sensible data stored into the database is encoded through one way encryption algorithms so that it is safe and legal to store it, this has been done for the user's password.
+For security reasons, the sensitive data stored into the database is encoded through one way encryption algorithms so that it is safe and legal to store it, this has been done for the user's password.
 ****
 **Restricted access to URL paths**
 
